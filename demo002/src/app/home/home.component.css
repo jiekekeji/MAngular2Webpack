@@ -1,0 +1,24 @@
+.list1 {
+  list-style: none;
+  width: 100%;
+  height: auto;
+}
+
+.list1 > li {
+  height: 200px;
+  width: 200px;
+  float: left;
+  margin-left: 32px;
+  margin-top: 32px;
+  background-color: azure;
+}
+
+.list2 {
+  list-style: none;
+  width: 100%;
+  height: auto;
+}
+
+.list2 > li {
+
+}
