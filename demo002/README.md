@@ -1,6 +1,9 @@
 AngularJS2-路由、路由嵌套、路由导航、路由传值和取值
 ------------------------------
 
+![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo002/preview/demo002.gif)
+
+
 一、创建响应的组件 IndexComponent、HomeComponent、AboutusComponent、DetailComponent，在app.module.ts下加入组件声明：
 
 ```
@@ -128,6 +131,8 @@ export class AppModule {
 ```
 
 整个路由关系跟下图差不多：
+
+![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo002/preview/demo002-1.png)
 
 五、编程式导航传值和取值
 
