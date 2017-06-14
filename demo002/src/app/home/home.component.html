@@ -1,18 +1,13 @@
-<h4>
-  这是主页组件
-</h4>
 <!--列表部分-->
 <ul class="list1">
   <li (click)="openDetail(site)" *ngFor="let site of sites">
     {{site}}
   </li>
+  <div style="clear: both"></div>
 </ul>
+
 <!--各种跳转演示-->
 <ul class="list2">
-  <li>asdfasdf</li>
-  <li>asdfasdf</li>
-  <li>asdfasdf</li>
-  <li>asdfasdf</li>
-  <li>asdfasdf</li>
-  <li>asdfasdf</li>
+  <li (click)="open1()">导航传值方式一</li>
+  <li (click)="open2()">导航传值方式二</li>
 </ul>

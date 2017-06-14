@@ -16,7 +16,7 @@ import { DetailComponent } from './detail/detail.component';
     HomeComponent,
     AboutusComponent,
     IndexComponent,
-    DetailComponent
+    DetailComponent,
   ],
   imports: [
     BrowserModule,

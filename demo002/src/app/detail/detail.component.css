@@ -1,0 +1,26 @@
+.container {
+  width: 960px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.top-content {
+  height: 60px;
+  width: 960px;
+  margin: 0 auto;
+  background-color: azure;
+}
+
+.nav-container {
+  height: 48px;
+  width: 100%;
+  background-color: darkseagreen;
+}
+
+.nav-desc {
+  height: 48px;
+  width: 960px;
+  margin: 0 auto;
+  line-height: 48px;
+  color: white;
+}

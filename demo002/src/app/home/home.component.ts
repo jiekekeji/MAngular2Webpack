@@ -10,7 +10,7 @@ export class HomeComponent implements OnInit {
   sites = [1, 2, 3, 4];
   user = {id: 123, name: "jack", age: 12};
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private location: Location) {
   }
 
   ngOnInit() {
@@ -21,24 +21,29 @@ export class HomeComponent implements OnInit {
    * @param site
    */
   openDetail(site) {
-    // 第一种方式,默认从跟路径开始
-    // 如访问的路径为: /detail/abc,
-    // 写法为: this.router.navigate(['detail',"abc"], {queryParams: {id: site}});
+    //跳转路径为/detail
     this.router.navigate(['detail'], {queryParams: {id: site}});
+  }
 
-    //第二种方式
-    //如访问的路径为: /detail/abc,
-    //写法为: this.router.navigate(['/detail/abc',"abc"], {queryParams: {id: site}});
-    this.router.navigate(['/detail'], {queryParams: {id: site}});
+  // 方式一,默认从跟路径开始
+  // 如访问的路径为: /detail,
+  // 写法为: this.router.navigate(['detail'], {queryParams: {id: site}});
+  //如访问路径为:/detail/abc,
+  // 写法为: this.router.navigate(['detail',"abc"], {queryParams: {id: site}});
+  open1() {
+    //这里跳转到/index/aboutus路径,不携带参数
+    this.router.navigate(["index", "aboutus"]);
+    //或者采用这样的方式
+    // this.router.navigate(["/index/aboutus"]);
+  }
 
-    //第三种如果不需要传递参数:
+  // 方式二,直接写路径
+  // 如访问的路径为: /detail,
+  // 写法为: this.router.navigate(['/detail'], {queryParams: {id: site}});
+  //如访问路径为:/detail/abc,
+  // 写法为: this.router.navigate(['/detail/abc'], {queryParams: {id: site}});
+  open2() {
     this.router.navigate(['/detail']);
-
-    //第四种，参数为数组
-    this.router.navigate(['/detail'], {queryParams: this.sites});
-
-    //第五种，参数为对象
-    this.router.navigate(['/detail'], {queryParams: this.user});
   }
 
 }

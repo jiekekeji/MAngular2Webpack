@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+;
 
 @Component({
   selector: 'app-detail',
@@ -8,19 +9,20 @@ import {ActivatedRoute, Params} from '@angular/router';
 })
 export class DetailComponent implements OnInit {
 
+  id = "";
+  private sub: any;
+
   constructor(private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
-    // this.activatedRoute.params.subscribe((params: Params) => {
-    //   console.log("参数:", params)
-    // })
+    this.sub = this.activatedRoute.queryParams.subscribe(params => {
+      this.id = params["id"];
+    });
+  }
 
-    this.activatedRoute.params.subscribe((params: Params) => {
-      // this.id = params['id'];
-      let name = params['name'];
-      console.log("名字:", params)
-    })
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
 }
