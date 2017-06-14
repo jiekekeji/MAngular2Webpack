@@ -10,7 +10,7 @@ export class HomeComponent implements OnInit {
   sites = [1, 2, 3, 4];
   user = {id: 123, name: "jack", age: 12};
 
-  constructor(private router: Router, private location: Location) {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
    */
   openDetail(site) {
     //跳转路径为/detail
-    this.router.navigate(['detail'], {queryParams: {id: site}});
+    this.router.navigate(['detail'], {queryParams: {pid: site}});
   }
 
   // 方式一,默认从跟路径开始
@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
   //如访问路径为:/detail/abc,
   // 写法为: this.router.navigate(['/detail/abc'], {queryParams: {id: site}});
   open2() {
-    this.router.navigate(['/detail']);
+    this.router.navigate(['/detail'], {queryParams: this.user});
   }
 
 }

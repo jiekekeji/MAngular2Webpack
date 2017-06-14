@@ -9,6 +9,7 @@ const routes: Routes = [
   {
     path: 'index',
     component: IndexComponent,
+    //index下的子路由
     children: [
       {
         path: "home",
@@ -25,6 +26,7 @@ const routes: Routes = [
     component: DetailComponent
   },
   {
+    // 如未匹配到任何路由，那么重定向到/index/home
     path: '',
     redirectTo: "/index/home",
     pathMatch: 'full'
