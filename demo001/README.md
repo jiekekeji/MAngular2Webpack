@@ -37,7 +37,7 @@ ng new demo001
 ```
 ng serve
 ```
-浏览器输入：http://localhost:4200/  就可以看到 app works!。
+浏览器输入：http://localhost:4200/ 就可以看到 app works!。
 
 
 5、创建一个angular的组件,如下创建一个home组件：在demo001目录下执行 
@@ -57,4 +57,6 @@ ng g module about
 完成后app目录下多了一个about目录：
 
 ![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo001/preview/demo001-2.png)
+
+就先到这里。~~~
 
