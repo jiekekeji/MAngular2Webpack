@@ -1,31 +1,60 @@
-# Demo001
+AngularJS2——使用Angular Cli 快速搭建工程
+--------------------
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.28.3.
+软件安装：nodejs5.0以上；npm3.0以上（安装nodejs的时候自动就安装了npm）,然后配置相关环境变量。
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+由于npm 较慢，我们使用淘宝的npm镜像，安装cnpm:
 
-## Code scaffolding
+```
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+1、安装angular-cli
 
-## Build
+```
+cnpm install -g angular-cli
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+2、卸载angular-cli；如果之前已安装需要卸载干净
 
-## Running unit tests
+```
+cnpm uninstall -g angular-cli
+cnpm cache clean
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+3、创建Angular2工程,如创建demo001工程，进入工程存放目录，demo001为工程名，执行如下命令：
 
-## Running end-to-end tests
+```
+ng new demo001
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+执行如上命令后，等待初始化和安装相应的包，完成后的项目项目大致如下：
 
-## Deploying to GitHub Pages
+![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo001/preview/demo001.png)
 
-Run `ng github-pages:deploy` to deploy to GitHub Pages.
+4、启动工程：进入demo001目录 执行
 
-## Further help
+```
+ng serve
+```
+浏览器输入：http://localhost:4200/  就可以看到 app works!。
 
-To get more help on the `angular-cli` use `ng help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+5、创建一个angular的组件,如下创建一个home组件：在demo001目录下执行 
+
+```
+ng g component home
+```
+完成后app目录下多了一个home目录：
+
+![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo001/preview/demo001-1.png)
+
+6、创建一个angular的模块，如下创建一个about模块：在demo001目录下执行 
+
+```
+ng g module about
+```
+完成后app目录下多了一个about目录：
+
+![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo001/preview/demo001-2.png)
+
