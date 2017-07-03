@@ -14,12 +14,12 @@ AngularJS2-多模块，多模块路由懒加载
 
 ![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo003/preview/demo0033.png)
 
+2、根模块
+------------------------------
 
-2、app.module 作为项目的根模块，直接关联的有user模块、commodity模块、home组件。commodity模块下有comment模块。每个模块下有自己的组件和路由配置文件。
-------------------------------------------------------------------------------------------------------------------------
+2.1、app.module 作为项目的根模块，直接关联的有user模块、commodity模块、home组件。commodity模块下有comment模块。每个模块下有自己的组件和路由配置文件。
 
-3、app模块的路由配置app.routes.ts如下：注意当配置的是模块时，使用的是loadChildren。loadChildren值的方式：
-------------------------------------------------------------------------------------------------------------------------
+2.2、app模块的路由配置app.routes.ts如下：注意当配置的是模块时，使用的是loadChildren。loadChildren值的方式：
 
 ```
 loadChildren: "./commodity/commodity.module#CommodityModule"
@@ -99,6 +99,78 @@ import {HomeComponent} from './home/home.component';
   bootstrap: [AppComponent]
 })
 export class AppModule {
+}
+
+```
+
+3、用户模块
+------------------------------
+
+3.1、user.routes.ts的模块配置如下：用户模块的访问路径是以app.routes为基准拼接的，如访问如下配置的路由，需要在前面加上user,比如：/user/container.
+
+
+```
+import {ContainerComponent} from './container/container.component';
+import {RegisterComponent} from './register/register.component';
+import {LoginComponent} from './login/login.component';
+export const userRoutes = [
+  {
+    path: "",
+    redirectTo: 'container/register',
+    pathMatch: 'full'
+  },
+  {
+    path: "container",
+    component: ContainerComponent,
+    children: [
+      {
+        path: "register",
+        component: RegisterComponent
+      },
+      {
+        path: "login",
+        component: LoginComponent
+      },
+    ]
+  },
+];
+
+```
+
+3.2、在user.module.ts下做相应声明,使用的是forChild：
+
+```
+import {RouterModule} from '@angular/router';
+import {userRoutes} from "./user.routes";
+....
+
+  imports: [
+    CommonModule,
+    RouterModule,
+    RouterModule.forChild(userRoutes)
+  ],
+```
+
+user.module.ts完整代码：
+
+```
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {LoginComponent} from './login/login.component';
+import {RouterModule} from '@angular/router';
+import {userRoutes} from "./user.routes";
+import { RegisterComponent } from './register/register.component';
+import { ContainerComponent } from './container/container.component'
+
+@NgModule({
+  imports: [
+    CommonModule,
+    RouterModule,
+    RouterModule.forChild(userRoutes)
+  ],
+  declarations: [LoginComponent, RegisterComponent, ContainerComponent]
+})
+export class UserModule {
 }
 
 ```

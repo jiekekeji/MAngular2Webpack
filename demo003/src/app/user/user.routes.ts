@@ -1,8 +1,6 @@
 import {ContainerComponent} from './container/container.component';
 import {RegisterComponent} from './register/register.component';
 import {LoginComponent} from './login/login.component';
-
-
 export const userRoutes = [
   {
     path: "",
@@ -23,5 +21,4 @@ export const userRoutes = [
       },
     ]
   },
-
 ];
