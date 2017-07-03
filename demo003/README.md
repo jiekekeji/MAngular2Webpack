@@ -7,3 +7,8 @@ AngularJS2-多模块，多模块路由懒加载
 
 
 ![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo003/preview/demo0032.png)
+
+
+目录结构：
+
+![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo003/preview/demo0033.png)
