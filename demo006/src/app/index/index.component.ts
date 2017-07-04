@@ -22,7 +22,7 @@ export class IndexComponent implements OnInit {
   }
 
   /**
-   * 在这个方法中注册订阅
+   * 在这个方法中注册订阅，只调用一次就行
    */
   ngAfterViewInit() {
     let that = this;

@@ -9,12 +9,14 @@ import {appRoutes}    from "./app.routes";
 import {AppComponent} from './app.component';
 import {IndexComponent} from './index/index.component';
 import { ChildComponent } from './child/child.component';
+import { Child1Component } from './child1/child1.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
-    ChildComponent
+    ChildComponent,
+    Child1Component
   ],
   imports: [
     BrowserModule,

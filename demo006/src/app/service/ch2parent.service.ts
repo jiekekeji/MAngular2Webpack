@@ -7,8 +7,10 @@ import {Subject}from"rxjs/Subject";
 @Injectable()
 export class Ch2parentService {
 
+  //声明变量 订阅Observer
   private subject = new Subject();
-  observer = this.subject.asObservable();
+
+  public observer = this.subject.asObservable();
 
   constructor() {
   }

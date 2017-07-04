@@ -4,3 +4,16 @@
   margin: 0 auto;
   background-color: lightblue;
 }
+
+.compo {
+  list-style: none;
+  height: auto;
+  width: auto;
+}
+
+.compo > li {
+  margin-left: 20px;
+  height: auto;
+  width: auto;
+  float: left;
+}

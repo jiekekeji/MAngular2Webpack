@@ -8,6 +8,8 @@ import {Ch2parentService} from "../service/ch2parent.service"
 })
 export class ChildComponent implements OnInit {
 
+  private i = 1;
+
   constructor(private ch2parentService: Ch2parentService) {
   }
 
@@ -15,8 +17,8 @@ export class ChildComponent implements OnInit {
   }
 
   add() {
-    console.log("add");
-    this.ch2parentService.update2Parent("1");
+    this.i++;
+    this.ch2parentService.update2Parent(this.i);
   }
 
 
