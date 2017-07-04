@@ -37,6 +37,10 @@ export class PdlistComponent implements OnInit {
     console.log("changes cname=", changes["name"].currentValue);
   }
 
+  /**
+   * 发射事件
+   * @param index
+   */
   pdItemClicked(index) {
     this.emit2Parent.emit(index);
   }
