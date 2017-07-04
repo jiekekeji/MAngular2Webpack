@@ -1,0 +1,22 @@
+<!--头部部分-->
+<div class="title">
+  <div class="header-container">
+    <ul class="nav">
+      <li (click)="onItemClicked(0)">Item0</li>
+      <li (click)="onItemClicked(1)">Item1</li>
+      <li (click)="onItemClicked(2)">Item2</li>
+      <li (click)="onItemClicked(3)">Item3</li>
+    </ul>
+  </div>
+</div>
+
+<!--列表部分-->
+<div class="list-container">
+  <app-pdlist type="{{type}}" [name]="name" parameter="{{parameter}}"></app-pdlist>
+</div>
+
+
+<div style="clear: both"></div>
+
+<!--底部部分-->
+<app-footer></app-footer>

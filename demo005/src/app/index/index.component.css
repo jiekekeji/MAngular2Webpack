@@ -1,0 +1,34 @@
+.title {
+  background-color: lightskyblue;
+  height: 36px;
+}
+
+.header-container {
+  height: 36px;
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.nav {
+  padding: 0px;
+  margin: 0px;
+  height: auto;
+  width: 100%;
+  list-style: none;
+}
+
+.nav > li {
+  text-align: center;
+  line-height: 36px;
+  margin-left: 1px;
+  height: 36px;
+  width: 160px;
+  float: left;
+  background-color: lightcoral;
+}
+
+.list-container {
+  width: 1000px;
+  margin: 0 auto;
+  height: auto;
+}
