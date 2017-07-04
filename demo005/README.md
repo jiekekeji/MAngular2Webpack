@@ -1,31 +1,92 @@
-# Demo005
+AngularJS2-组件引用 组件复用 组件通信@Input @Output
+------------------------------
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.28.3.
+1、效果图
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo005/preview/demo0052.gif)
 
-## Code scaffolding
+2、图例解释
+![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo005/preview/demo0051.png)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
 
-## Build
+3、如何在组件中引用组件？如在index组件中引用footer组件和pdlist组件？
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+3.1、在app.module.ts中引入和声明好组件,正常情况下在使用ng g c 命令创建组件时已声明好：
 
-## Running unit tests
+```
+...
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+import {AppComponent} from './app.component';
+import {FooterComponent} from './footer/footer.component';
+import {PdlistComponent} from './pdlist/pdlist.component';
+import {IndexComponent} from './index/index.component';
 
-## Running end-to-end tests
+@NgModule({
+  declarations: [
+    AppComponent,
+    FooterComponent,
+    PdlistComponent,
+    IndexComponent
+  ],
+  
+  ...
+```
+3.2、在footer.component.ts和pdlist.component.ts中可以看到Component中有一个selector属性，该属性是引用的标识：
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+footer.component.ts：
 
-## Deploying to GitHub Pages
+```
+...
+@Component({
+  selector: 'app-footer',
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.css']
+})
 
-Run `ng github-pages:deploy` to deploy to GitHub Pages.
+...
+```
 
-## Further help
+pdlist.component.ts:
 
-To get more help on the `angular-cli` use `ng help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```
+...
+
+@Component({
+  selector: 'app-pdlist',
+  templateUrl: './pdlist.component.html',
+  styleUrls: ['./pdlist.component.css']
+})
+
+...
+```
+
+在index组件通过selector属性的值引用他们 index.component.html:
+
+```
+<!--头部部分-->
+<div class="title">
+  <div class="header-container">
+    <ul class="nav">
+      <li (click)="onItemClicked(0)">Item0</li>
+      <li (click)="onItemClicked(1)">Item1</li>
+      <li (click)="onItemClicked(2)">Item2</li>
+      <li (click)="onItemClicked(3)">Item3</li>
+      <li>子组件产品序号：{{cIndex}}</li>
+    </ul>
+  </div>
+</div>
+
+<!--列表部分-->
+<div class="list-container">
+  <app-pdlist></app-pdlist>
+</div>
+
+
+<div style="clear: both"></div>
+
+<!--底部部分-->
+<app-footer></app-footer>
+
+```
+
+

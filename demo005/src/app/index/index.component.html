@@ -6,13 +6,14 @@
       <li (click)="onItemClicked(1)">Item1</li>
       <li (click)="onItemClicked(2)">Item2</li>
       <li (click)="onItemClicked(3)">Item3</li>
+      <li>子组件产品序号：{{cIndex}}</li>
     </ul>
   </div>
 </div>
 
 <!--列表部分-->
 <div class="list-container">
-  <app-pdlist type="{{type}}" [name]="name" parameter="{{parameter}}"></app-pdlist>
+  <app-pdlist type="{{type}}" [name]="name" (emit2Parent)="handlePro($event)"></app-pdlist>
 </div>
 
 
