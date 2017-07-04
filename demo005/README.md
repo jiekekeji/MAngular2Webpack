@@ -1,15 +1,19 @@
 AngularJS2-组件引用 组件复用 组件通信@Input @Output
-------------------------------
+==== 
 
-####1、效果图
+1、效果图
+------- 
 
 ![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo005/preview/demo0052.gif)
 
-####2、图例解释
+2、图例解释
+------- 
+
 ![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo005/preview/demo0051.png)
 
 
-####3、如何在组件中引用组件？如在index组件中引用footer组件和pdlist组件？
+3、如何在组件中引用组件？如在index组件中引用footer组件和pdlist组件？
+------- 
 
 3.1、在app.module.ts中引入和声明好组件,正常情况下在使用ng g c 命令创建组件时已声明好：
 
