@@ -6,7 +6,7 @@ AngularJS2-服务的简单使用 使用服务来做组件的通讯
 
 ![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo006/preview/demo0061.gif)
 
-![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo006/preview/demo0062.gif)
+![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo006/preview/demo0062.png)
 
 2、服务的简单使用
 ------- 
