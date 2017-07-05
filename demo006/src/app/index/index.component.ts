@@ -20,7 +20,9 @@ export class IndexComponent implements OnInit {
   private result: any;
 
   //注入服务
-  constructor(private service000Service: Service000Service, private service001Service: Service001Service, private service002Service: Service002Service) {
+  constructor(private service000Service: Service000Service,
+              private service001Service: Service001Service,
+              private service002Service: Service002Service) {
   }
 
   ngOnInit() {

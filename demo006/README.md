@@ -6,6 +6,8 @@ AngularJS2-服务的简单使用 使用服务来做组件的通讯
 
 ![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo006/preview/demo0061.gif)
 
+![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo006/preview/demo0062.gif)
+
 2、服务的简单使用
 ------- 
 
@@ -90,7 +92,9 @@ export class IndexComponent implements OnInit {
   private result: any;
 
   //注入服务
-  constructor(private service000Service: Service000Service, private service001Service: Service001Service, private service002Service: Service002Service) {
+  constructor(private service000Service: Service000Service,
+              private service001Service: Service001Service,
+              private service002Service: Service002Service) {
   }
 
   ngOnInit() {
@@ -128,213 +132,128 @@ export class IndexComponent implements OnInit {
       console.log("index", that.pitems);
     })
   }
+}
+
+```
+
+3、使用服务来做组件之间的通讯
+------- 
+
+3.1、第一步：使用命令新建服务：service002.service.ts，编辑内容如下：
+```
+import {Injectable} from '@angular/core';
+import {Subject}from"rxjs/Subject";
+
+@Injectable()
+export class Service002Service {
+
+  //声明变量 订阅Observer
+  private subject = new Subject();
+
+  public observer = this.subject.asObservable();
+
+  constructor() {
+  }
+
+  //调用next方法 Subject会向所有注册了observer的组件发送item值
+  updateAddress(address: any) {
+    this.subject.next(address);
+  }
+}
+```
+
+3.2、第二步：订阅端 index.component.ts 组件，可以有多个订阅端，例如效果图在index组件和child1组件都订阅参数address变化。
+
+在index.component.ts引入服务：
+```
+import {Service002Service} from "../service/service002.service"
+```
+使用providers属性将定义的服务注册到这个组件中，
+
+（注意：如果父组件注册过，则不需要再次注册##，例如index的父组件app组件没有注册，则需要在这进行注册；
+效果图中index组件作为child1组件的根组件已注册过Service002Service，所以在child1中省略这一步）。
+```
+providers: [Service002Service]
+```
+注入服务：
+```
+constructor(private service002Service: Service002Service) {
+  }
+```
+注册订阅address的变化，
+```
+    /**
+     * 注册订阅参数address的变化，在这个方法中注册订阅，只调用一次就行
+     */
+    ngAfterViewInit() {
+      let that = this;
+      this.service002Service.observer.subscribe((value: any) => {
+        that.pitems = value;
+        console.log("index", that.pitems);
+      })
+    }
+```
+
+3.2、第三步：发布端。在child.component.ts组件发布address参数的变化，
+
+引入服务：
+```
+import {Service002Service} from "../service/service002.service"
+```
+如果只作为发布，不需要使用providers属性将定义的服务注册到这个组件中，
+
+注入服务：
+```
+constructor(private service002Service: Service002Service) {
+  }
+```
+
+发布参数变化：
+```
+  add() {
+    let address = Math.random().toString(36).substring(3, 8);
+    this.service002Service.updateAddress(address);
+  }
+```
+
+完整发布端代码：
+```
+import {Component, OnInit} from '@angular/core';
+
+import {Service001Service} from "../service/service001.service"
+import {Service002Service} from "../service/service002.service"
+@Component({
+  selector: 'app-child',
+  templateUrl: './child.component.html',
+  styleUrls: ['./child.component.css']
+})
+export class ChildComponent implements OnInit {
+
+  private i = 1;
+  private username: any;
+
+  constructor(private service001Service: Service001Service, private service002Service: Service002Service) {
+  }
+
+  ngOnInit() {
+  }
+
+  add() {
+    let address = Math.random().toString(36).substring(3, 8);
+    this.service002Service.updateAddress(address);
+  }
+
+  /**
+   * 在这个方法中注册订阅，只调用一次就行
+   */
+  ngAfterViewInit() {
+    let that = this;
+    this.service001Service.observer.subscribe((username: any) => {
+      that.username = username;
+    })
+  }
 
 }
 
 ```
 
-
-![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo005/preview/demo0051.png)
-
-
-3、如何在组件中引用组件？如在index组件中引用footer组件和pdlist组件？
-------- 
-
-3.1、在app.module.ts中引入和声明好组件,正常情况下在使用ng g c 命令创建组件时已声明好：
-
-```
-...
-
-import {AppComponent} from './app.component';
-import {FooterComponent} from './footer/footer.component';
-import {PdlistComponent} from './pdlist/pdlist.component';
-import {IndexComponent} from './index/index.component';
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    FooterComponent,
-    PdlistComponent,
-    IndexComponent
-  ],
-  
-  ...
-```
-3.2、在footer.component.ts和pdlist.component.ts中可以看到Component中有一个selector属性，该属性是引用的标识：
-
-footer.component.ts：
-
-```
-...
-@Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css']
-})
-
-...
-```
-
-pdlist.component.ts:
-
-```
-...
-
-@Component({
-  selector: 'app-pdlist',
-  templateUrl: './pdlist.component.html',
-  styleUrls: ['./pdlist.component.css']
-})
-
-...
-```
-
-在index组件通过selector属性的值引用他们 index.component.html:
-
-```
-<!--头部部分-->
-<div class="title">
-  <div class="header-container">
-    <ul class="nav">
-      <li (click)="onItemClicked(0)">Item0</li>
-      <li (click)="onItemClicked(1)">Item1</li>
-      <li (click)="onItemClicked(2)">Item2</li>
-      <li (click)="onItemClicked(3)">Item3</li>
-      <li>子组件产品序号：{{cIndex}}</li>
-    </ul>
-  </div>
-</div>
-
-<!--列表部分-->
-<div class="list-container">
-  <app-pdlist></app-pdlist>
-</div>
-
-
-<div style="clear: both"></div>
-
-<!--底部部分-->
-<app-footer></app-footer>
-
-```
-
-4、父组件如何给子组件传递参数？如index组件给pdlist组件传递参数type，name？
-------- 
-
-4.1、子组件的写法：@Input()定义变量用于接收父组件传递的参数,pdlist.component.ts编辑如下：
-
-```
-   ...
-   
-  /**
-   * @Input() 用户接收父组件的传值
-   */
-  @Input() type: Number;
-  @Input() name: String;
-  
-  ...
-  
-  /**
-   * 当父组件像子组件传递参数事，监听@@Input值的变化
-   * @param changes
-   */
-  ngOnChanges(changes) {
-    console.log("changes ptype=", changes["type"].previousValue);
-    console.log("changes ctype=", changes["type"].currentValue);
-    console.log("changes pname=", changes["name"].previousValue);
-    console.log("changes cname=", changes["name"].currentValue);
-  }
-```
-
-4.2、父组件的写法：在index组件引用pdlist组件的地方，加上@Input声明的变量，index.component.html编辑如下：
-
-```
-...
-
-<app-pdlist type="{{type}}" [name]="name"></app-pdlist>
-
-...
-```
-
-两种方式，一种是type="{{type}}"，{{}}中的type为一个变量；二使用中括号[name]="name"，""中name为变量。
-
-在index.component.ts中定义两个变量type和name，通过改变这两个参数的值改变子组件的参数值：
-
-```
-  ...
-
-  public type: number;
-  public name: String;
-  
-  /**
-   * 改变传递给子组件的值
-   * @param index
-   */
-  onItemClicked(index) {
-    switch (index) {
-      case 0:
-        this.type = 0;
-        this.name = "Item0";
-        break;
-      case 1:
-        this.type = 1;
-        this.name = "Item1";
-        break;
-      case 2:
-        this.type = 2;
-        this.name = "Item2";
-        break;
-      case 3:
-        this.type = 3;
-        this.name = "Item3";
-        break;
-    }
-  }
-
-```
-
-5、子组件如何给父组件传递参数？如pdlist组件给index组件传递序号参数？
-------- 
-
-5.1、子组件写法：@Output()定义一个发射器，用于向外发射事件,pdlist.component.ts编辑如下：
-
-```
-  ...
-  
-  /**
-   * @Output() 用于向父组件发射值
-   * @type {EventEmitter}
-   */
-  @Output() emit2Parent = new EventEmitter();
-
-  ...
-  
-  /**
-   * 发射事件，当列表被点击时发射对应item的序号
-   * @param index
-   */
-  pdItemClicked(index) {
-    this.emit2Parent.emit(index);
-  }
-    
-```
-
-5.2、父组件的写法：在index组件引用pdlist组件的地方，加上@Output()声明的发射器emit2Parent，index.component.html编辑如下：
-
-```
-<app-pdlist (emit2Parent)="handlePro($event)"></app-pdlist>
-```
-
-当发射器 handlePro 触发时调用handlePro($event)函数，在pdlist.component.ts实现该函数：
-
-```
-
-  /**
-   * 处理子组件传递过来的值
-   * @param event
-   */
-  handlePro(event) {
-    this.cIndex = event;
-  }
-
-```
