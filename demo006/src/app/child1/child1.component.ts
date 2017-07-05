@@ -3,8 +3,6 @@ import {Component, OnInit} from '@angular/core';
 import {Ch2parentService} from "../service/ch2parent.service"
 
 @Component({
-  // 使用providers属性将定义的服务注册到这个组件中
-  providers: [Ch2parentService],
   selector: 'app-child1',
   templateUrl: './child1.component.html',
   styleUrls: ['./child1.component.css']
@@ -12,6 +10,7 @@ import {Ch2parentService} from "../service/ch2parent.service"
 export class Child1Component implements OnInit {
 
   private ch1Items: any;
+  private i = 1;
 
   constructor(private ch2parentService: Ch2parentService) {
   }
@@ -19,13 +18,19 @@ export class Child1Component implements OnInit {
   ngOnInit() {
   }
 
+  add() {
+    this.i++;
+    this.ch2parentService.update2Parent(this.i++);
+  }
+
   /**
    * 在这个方法中注册订阅，只调用一次就行
    */
   ngAfterViewInit() {
     let that = this;
-    console.log("ngAfterViewInit");
+
     this.ch2parentService.observer.subscribe((value: any) => {
+      console.log("ngAfterViewInit");
       that.ch1Items = value;
     })
   }

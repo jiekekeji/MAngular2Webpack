@@ -3,10 +3,10 @@ import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {SimpleService} from "../service/simple.service"
 import {Ch2parentService} from "../service/ch2parent.service"
 
-
 @Component({
   // 使用providers属性将定义的服务注册到这个组件中
-  providers: [SimpleService, Ch2parentService],
+  //如果需要全局注册，将providers注册到app.mudule.ts中
+  providers: [Ch2parentService],
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
@@ -19,6 +19,10 @@ export class IndexComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  callSimpleService() {
+    console.log(this.simpleService.getLoginState())
   }
 
   /**
