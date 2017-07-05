@@ -1,8 +1,20 @@
 <div class="container">
 
-  <button (click)="callSimpleService()">调用服务的方法</button>
+  <div class="area-1">
+    <p>1、服务的简单实用方法：</p>
+    <button (click)="callSimpleService()">调用服务的方法</button>
+    <p>2、服务返回值:{{result}}</p>
+  </div>
 
-  <p>订阅items的值：{{pitems}}</p>
+  <div class="area-1">
+    <p>
+      <button (click)="publishAddressChanges()">发布address变化</button>
+    </p>
+    <p>
+      <button (click)="publishUsernameChanges()">发布username变化</button>
+    </p>
+    <p>1、订阅参数address变化:{{pitems}}</p>
+  </div>
 
   <ul class="compo">
     <li>
@@ -12,6 +24,4 @@
       <app-child1></app-child1>
     </li>
   </ul>
-
-
 </div>

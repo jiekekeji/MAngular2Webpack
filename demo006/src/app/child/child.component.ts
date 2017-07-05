@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Ch2parentService} from "../service/ch2parent.service"
+import {Service001Service} from "../service/service001.service"
+import {Service002Service} from "../service/service002.service"
 @Component({
   selector: 'app-child',
   templateUrl: './child.component.html',
@@ -9,17 +10,27 @@ import {Ch2parentService} from "../service/ch2parent.service"
 export class ChildComponent implements OnInit {
 
   private i = 1;
+  private username: any;
 
-  constructor(private ch2parentService: Ch2parentService) {
+  constructor(private service001Service: Service001Service, private service002Service: Service002Service) {
   }
 
   ngOnInit() {
   }
 
   add() {
-    this.i++;
-    this.ch2parentService.update2Parent(this.i);
+    let address = Math.random().toString(36).substring(3, 8);
+    this.service002Service.updateAddress(address);
   }
 
+  /**
+   * 在这个方法中注册订阅，只调用一次就行
+   */
+  ngAfterViewInit() {
+    let that = this;
+    this.service001Service.observer.subscribe((username: any) => {
+      that.username = username;
+    })
+  }
 
 }

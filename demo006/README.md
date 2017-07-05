@@ -1,13 +1,138 @@
-AngularJS2-组件引用 组件复用 组件通信@Input @Output
+AngularJS2-服务的简单使用 使用服务来做组件的通讯
 ==== 
 
 1、效果图
 ------- 
 
-![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo005/preview/demo0052.gif)
+![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo006/preview/demo0061.gif)
 
-2、图例解释
+2、服务的简单使用
 ------- 
+
+2.1、新建服务的命令:
+
+```
+ng g s dir/servicemane
+```
+
+其中dir为新建的service所在的目录，如在app/service目录下新建服务service001:
+
+```
+ng g s service/service001
+```
+
+如在直接在app目录下新建服务service001:
+
+```
+ng g s service001
+```
+
+2.2、新建的service000.service.ts 服务编辑如下，模拟获取登录状态的一个方法：
+
+```
+import {Injectable} from '@angular/core';
+
+@Injectable()
+export class Service000Service {
+
+  constructor() {
+  }
+
+  getLoginState() {
+    return Math.random();
+  }
+}
+```
+
+2.3、在index.component.ts组件中使用服务：
+     
+第一步：引入服务：
+```
+import {Service000Service} from "../service/service000.service"
+```
+第二步：使用providers属性将定义的服务注册到这个组件中，##注意：如果父组件注册过，则不需要再次注册
+```
+providers: [Service000Service]
+```
+第三步：注入服务：
+```
+constructor(private service000Service: Service000Service) {
+  }
+```
+第四步：调用服务提供的方法：
+```
+  callSimpleService() {
+    this.result = this.service000Service.getLoginState();
+  }
+```
+
+整个index.component.ts组件的代码：
+```
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+
+//引入服务
+import {Service000Service} from "../service/service000.service"
+import {Service001Service} from "../service/service001.service"
+import {Service002Service} from "../service/service002.service"
+
+@Component({
+  // 使用providers属性将定义的服务注册到这个组件中
+  //如果需要全局注册，将providers注册到app.mudule.ts中
+  //如果父组件注册过，则不需要再次注册
+  providers: [Service000Service, Service001Service, Service002Service],
+  selector: 'app-index',
+  templateUrl: './index.component.html',
+  styleUrls: ['./index.component.css']
+})
+export class IndexComponent implements OnInit {
+
+  pitems: any;
+  private result: any;
+
+  //注入服务
+  constructor(private service000Service: Service000Service, private service001Service: Service001Service, private service002Service: Service002Service) {
+  }
+
+  ngOnInit() {
+  }
+
+  //调用服务的方法
+  callSimpleService() {
+    this.result = this.service000Service.getLoginState();
+  }
+
+  /**
+   * 调用服务的方法:发布参数username的变化
+   */
+  publishUsernameChanges() {
+    let address = Math.random().toString(36).substring(3, 8);
+    this.service001Service.updateUsername(address);
+  }
+
+  /**
+   * 调用服务的方法:发布参数address的变化
+   */
+  publishAddressChanges() {
+    let address = Math.random().toString(36).substring(3, 8);
+    this.service002Service.updateAddress(address);
+    console.log("index", address)
+  }
+
+  /**
+   * 注册订阅参数address的变化，在这个方法中注册订阅，只调用一次就行
+   */
+  ngAfterViewInit() {
+    let that = this;
+    this.service002Service.observer.subscribe((value: any) => {
+      that.pitems = value;
+      console.log("index", that.pitems);
+    })
+  }
+
+}
+
+```
+
 
 ![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo005/preview/demo0051.png)
 

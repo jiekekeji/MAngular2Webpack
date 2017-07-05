@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
 
 @Injectable()
-export class SimpleService {
+export class Service000Service {
 
   constructor() {
   }
 
   getLoginState() {
-
-    return "登录状态";
+    return Math.random();
   }
 }
