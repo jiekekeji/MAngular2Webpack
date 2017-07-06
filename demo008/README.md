@@ -188,4 +188,5 @@ private username = "张三";
     console.log("列表事件绑定:", item);
   }
 ```
+
 ![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo008/preview/demo0085.gif)
