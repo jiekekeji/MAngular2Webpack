@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-index',
@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  constructor() { }
+  private letter = "";
+  private isUpper = false;
+
+  constructor() {
+  }
 
   ngOnInit() {
+    // let that = this;
+    // setInterval(function () {
+    //   that.letter = that.letter + "a";
+    // }, 1000)
   }
 
 }

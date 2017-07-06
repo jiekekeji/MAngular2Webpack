@@ -8,11 +8,15 @@ import {RouterModule} from '@angular/router';
 import {appRoutes}    from "./app.routes";
 import {AppComponent} from './app.component';
 import {IndexComponent} from './index/index.component';
+import {CommPipe} from './pipe/comm.pipe';
+import { LetterPipe } from './pipe/letter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    IndexComponent
+    IndexComponent,
+    CommPipe,
+    LetterPipe,
   ],
   imports: [
     BrowserModule,
