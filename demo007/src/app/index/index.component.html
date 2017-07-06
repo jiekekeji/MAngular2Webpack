@@ -1,10 +1,10 @@
 <div class="container">
   <p>1、简单的管道：大小写转换</p>
   <input placeholder="请输入需要转换的字母" [(ngModel)]="letter">
-  <input type="radio" id="toUpper" name="letter" [checked]="isUpper">
+  <input type="radio" id="toUpper" name="letter" [(ngModel)]="isUpper" value="1">
   <label for="toUpper">转为大写</label>
-  <input type="radio" id="toLower" name="letter" [checked]="isUpper">
+  <input type="radio" id="toLower" name="letter" [(ngModel)]="isUpper" value="2">
   <label for="toLower">转为小写</label>
-  <p>使用管道转换后的结果:{{letter|letter:isUpper}}</p>
+  <p>使用管道转换后的结果:{{letter|letterpipe:isUpper}}</p>
 
 </div>

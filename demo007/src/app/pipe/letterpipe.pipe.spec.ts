@@ -1,11 +1,11 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async } from '@angular/core/testing';
-import { CommPipe } from './comm.pipe';
+import { LetterpipePipe } from './letterpipe.pipe';
 
-describe('CommPipe', () => {
+describe('LetterpipePipe', () => {
   it('create an instance', () => {
-    const pipe = new CommPipe();
+    const pipe = new LetterpipePipe();
     expect(pipe).toBeTruthy();
   });
 });

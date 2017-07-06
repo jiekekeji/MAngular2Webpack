@@ -1,19 +1,19 @@
 import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
-  name: 'letter'
+  name: 'letterpipe'
 })
-export class LetterPipe implements PipeTransform {
+export class LetterpipePipe implements PipeTransform {
 
   /**
    * 字母大写小的转换
    * @param value   需要转换的字母
-   * @param isToLocaleUpperCase true转为大写；false转为小写
+   * @param isToLocaleUpperCase 1转为大写；否则转为小写
    * @returns {string}  转换后的值
    */
-  transform(value: string, isToLocaleUpperCase: boolean): any {
+  transform(value: string, isToLocaleUpperCase: string): any {
     console.log(isToLocaleUpperCase);
-    if (isToLocaleUpperCase) {
+    if (isToLocaleUpperCase === "1") {
       return value.toLocaleUpperCase();
     } else {
       return value.toLocaleLowerCase();
