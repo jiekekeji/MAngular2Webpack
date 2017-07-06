@@ -1,3 +1,61 @@
-<p>
-  index works!
-</p>
+<div class="container">
+  <p>1、简单数据绑定：</p>
+  <p>用户的名字为:{{username}}</p>
+  <p>2、绑定对象上的值：</p>
+  <p>学生姓名:{{student.username}}、学生年龄：{{student.age}}、学生的地址：{{student.address}}</p>
+  <p>3、绑定数组的值：</p>
+  <ul>
+    <li *ngFor="let item of students">
+      学生姓名:{{item.username}}、学生年龄：{{item.age}}、学生的地址：{{item.address}}
+    </li>
+  </ul>
+</div>
+
+<div class="container">
+  <p>1、属性绑定：</p>
+  <input [placeholder]="username">
+  <img [src]="imgurl" height="{{imgH}}" [width]="getImgW()">
+
+  <p>2、样式绑定：</p>
+  <p [style.color]="txColor">使用属性的方式绑定字体为红色的样式</p>
+  <p [style.color]="getTxColor()">使用方法的方式绑定字体为红色的样式</p>
+
+  <p>3、样式对象绑定：</p>
+  <p [ngStyle]="styleColor">我绑定了样式对象</p>
+  <p [ngStyle]="getStyleColor()">我绑定了样式对象</p>
+</div>
+
+
+<div class="container">
+  <p>1、类class绑定，绑定单个class：</p>
+  <p [class.ccsty]="isCcsty">我绑定了单个class</p>
+  <p [class.ccsty]="getIsCcsty()">我绑定了单个class</p>
+
+  <p>1、类class绑定，绑定多个class：</p>
+  <p [ngClass]="moreClz">使用属性的方式绑定多个class</p>
+  <p [ngClass]="getMoreClz()">使用方法的方式绑定多个class</p>
+</div>
+
+<div class="container">
+  <p>1、*ngFor条件渲染：</p>
+  <p *ngIf="isShow">当isShow为ture时显示，false时隐藏</p>
+  <button (click)="changeIsShow()">改变isShow的值</button>
+
+  <p>2、NgSwitch多条件判断渲染：</p>
+  <div [ngSwitch]="caseV">
+    <p *ngSwitchCase="1">1</p>
+    <p *ngSwitchCase="2">2</p>
+    <p *ngSwitchCase="3">3</p>
+  </div>
+  <button (click)="changeCaseV()">改变caseV的值</button>
+</div>
+
+
+<div class="container">
+  <p>1、列表事件绑定：</p>
+  <ul>
+    <li (click)="itemClick(item)" *ngFor="let item of students" style="border: 1px dashed greenyellow">
+      学生姓名:{{item.username}}、学生年龄：{{item.age}}、学生的地址：{{item.address}}
+    </li>
+  </ul>
+</div>

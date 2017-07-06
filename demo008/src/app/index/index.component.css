@@ -1,0 +1,15 @@
+.container {
+  height: auto;
+  width: 100%;
+  border: 1px dashed grey;
+}
+
+.ccsty {
+  background-color: gainsboro;
+  color: rebeccapurple;
+}
+
+.aasty {
+  font-size: 20px;
+  font-weight: bolder;
+}
