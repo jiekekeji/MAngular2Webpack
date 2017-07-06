@@ -70,6 +70,5 @@ export class LetterpipePipe implements PipeTransform {
 ```
 <p>使用管道转换后的结果:{{letter|letterpipe:isUpper}}</p>
 ```
-
 其中letter对应函数transform的参数value;letterpipe为管道的名称;isUpper为函数transform的参数isToLocaleUpperCase。
 
