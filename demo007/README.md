@@ -72,3 +72,4 @@ export class LetterpipePipe implements PipeTransform {
 ```
 其中letter对应函数transform的参数value;letterpipe为管道的名称;isUpper为函数transform的参数isToLocaleUpperCase。
 
+![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo007/preview/demo0071.gif)
