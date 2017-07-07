@@ -7,6 +7,9 @@ import {Http, Response, Headers, RequestOptions, URLSearchParams} from '@angular
 })
 export class IndexComponent implements OnInit {
 
+  private username="";
+  private password="";
+
   constructor(public http: Http) {
   }
 
@@ -15,10 +18,14 @@ export class IndexComponent implements OnInit {
       username: "rose",
       password: "123456"
     });
-    let headers = new Headers({'Content-Type': 'application/json'}); //其实不表明 json 也可以, ng 默认好像是 json
+
+    let params = new URLSearchParams();
+    params.set("username", "rose");
+    params.set("password", "123456");
+    let headers = new Headers({"m-type": "njnkasndlfkn"});
     let options = new RequestOptions({headers: headers});
 
-    this.http.post("/api/store/user/login", body, options).subscribe(res => {
+    this.http.post("/api/store/user/login", params, options).subscribe(res => {
       console.log("res", res);
     }, error => {
       console.log("error", error);
