@@ -1,0 +1,41 @@
+.container {
+  width: 300px;
+  height: 300px;
+  background-color: blanchedalmond;
+  position: absolute;
+  left: 50%;
+  top: 180px;
+  margin-left: -150px;
+}
+
+.tx-sty {
+  height: 28px;
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.btn-sty {
+  height: 36px;
+  width: 80%;
+  background-color: darkseagreen;
+  margin: 0 auto;
+  margin-top: 30px;
+  text-align: center;
+  line-height: 36px;
+  cursor: pointer;
+}
+
+.nav-container {
+  height: 36px;
+  width: 80%;
+  line-height: 36px;
+  margin: 0 auto;
+}
+
+.nav-container > .link {
+  float: right;
+  color: blue;
+  cursor: pointer;
+}

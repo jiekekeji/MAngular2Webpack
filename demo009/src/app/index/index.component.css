@@ -1,28 +1,22 @@
-.container {
-  width: 240px;
-  height: 160px;
-  background-color: blanchedalmond;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin-left: -120px;
-  margin-top: -50px;
+.header {
+  height: 48px;
+  width: 100%;
+  background-color: black;
 }
 
-.tx-sty {
-  width: 80%;
-  display: block;
-  margin: 0 auto;
-  margin-top: 10px;
-}
-
-.btn-sty {
-  height: 28px;
-  width: 80%;
-  background-color: darkseagreen;
-  margin: 0 auto;
-  margin-top: 30px;
+.logo {
+  padding: 0px;
+  margin: 0px;
+  display: inline-block;
+  height: 48px;
+  width: 60px;
+  color: white;
+  line-height: 48px;
+  margin-left: 200px;
   text-align: center;
-  line-height: 28px;
+}
+
+.logo:hover {
+  background-color: gray;
   cursor: pointer;
 }

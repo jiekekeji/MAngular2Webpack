@@ -1,0 +1,9 @@
+<div class="user-info">
+  <p>用户名:{{userInfo.user.username}},邮箱:{{userInfo.user.email}},地址:{{userInfo.user.address}}</p>
+</div>
+
+<ul class="list">
+  <li *ngFor="let item of commoditylist.commoditys" (click)="toListDetail(item)">
+    名称:{{item.title}},价格:{{item.price}}
+  </li>
+</ul>
