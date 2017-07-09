@@ -155,6 +155,7 @@ public Object login(HttpServletRequest request, HttpServletResponse response) {
 ```
 
 三、get 请求方式
+------- 
 1、Angular2客户端：
 
    引入相关包并注入Http：
