@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 
     //将url，请求参数，请求头发情请求
     this.http.post("/api/store/user/login", params, options).subscribe(res => {
-
+      //处理响应结果
       this.handleLoginResult(res.json());
     }, error => {
       console.log("error", error);
