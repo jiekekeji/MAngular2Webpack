@@ -20,6 +20,9 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    //请求地址
+    let url = "/api/store/user/register";
+
     //请求体
     let body = JSON.stringify({
       username: this.username,
@@ -32,7 +35,7 @@ export class RegisterComponent implements OnInit {
     let options = new RequestOptions({headers: headers});
 
     //将url，请求参数，请求头发情请求
-    this.http.post("/api/store/user/register", body, options).subscribe(res => {
+    this.http.post(url, body, options).subscribe(res => {
       console.log("res", res);
     }, error => {
       console.log("error", error);
