@@ -60,7 +60,7 @@ public class User {
     }
 
     /**
-     * 用户登录
+     * 用户注册
      *
      * @param request
      * @param response
