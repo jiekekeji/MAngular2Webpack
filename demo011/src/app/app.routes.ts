@@ -1,9 +1,15 @@
 import {HomeComponent} from './home/home.component';
+import {HelpComponent} from "./help/help.component"
 
 export const appRoutes = [
   {
     path: "",
     component: HomeComponent
+
+  },
+  {
+    path: "help",
+    component: HelpComponent
 
   },
   {

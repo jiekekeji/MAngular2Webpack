@@ -4,198 +4,60 @@ AngularJS2-打包发布后的路径问题及404问题
 一、打包发布后的路径问题
 ------- 
 
-假设现在demo011已经开发完成，于是我们使用如下命令对demo011进行打包：
+1、假设现在demo011已经开发完成，于是我们使用如下命令对demo011进行打包：
 
 ```
 ng build
 ```
 命令运行完成后，我们发现demo011目录下多了个dist目录，为了方便管理我想把生成的文件统一放在服务器的hello001目录下，
 
-(此处以tomcat7为例)于是我在webapp目录下新建了hello001目录，将dist下的文件都拷贝到hell001目录里，然后启动了服务器。
+(此处以tomcat7为例)于是我在webapps目录下新建了hello001目录，将dist下的文件都拷贝到hell001目录里，然后启动了服务器。
 
+我的服务器地址是 localhost,tomcat监听的端口号是8080，然后我在浏览器输入了地址:  http://localhost:8080/hello001  .
 
+然后浏览器什么都没看到，白白的一片，然后打开控制台，一大推红色的字体。tomcat下明明有hello001/index.html文件，？？。
 
+将dist下的文件拷贝到tomcat的根目录下试试呢？然后将dist目录下的文件全部拷贝到tomcat7的webapps/ROOT下，(之前的文件如果需要先备份)。
 
+浏览器输入了地址:  http://localhost:8080，居然能访问了，这是为啥？
 
-
-
-
-
-
-
-1、图例。
-------------------------------
-
-![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo003/preview/demo0031.gif)
-
-
-![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo003/preview/demo0032.png)
-
-
-目录结构：
-
-![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo003/preview/demo0033.png)
-
-2、根模块
-------------------------------
-
-2.1、app.module 作为项目的根模块，直接关联的有user模块、commodity模块、home组件。commodity模块下有comment模块。每个模块下有自己的组件和路由配置文件。
-
-2.2、app模块的路由配置app.routes.ts如下：注意当配置的是模块时，使用的是loadChildren。loadChildren值的方式：
+打开dist下的index.html,你会发现下面这句话：
 
 ```
-loadChildren: "./commodity/commodity.module#CommodityModule"
+<base href="/">
 ```
+这句话的意思是：href 属性规定页面中所有相对链接的基准 URL。这大概就知道什么原因了。
 
-是CommodityModule模块配置文件的文件路径（相对于app目录的），加上一个#分隔符，再加上导出模块的类名CommodityModule。
-
-app.routes.ts完整的代码：
-
-```
-import {HomeComponent} from './home/home.component';
-
-export const appRoutes = [
-  {
-    path: "",
-    component: HomeComponent
-
-  },
-  {
-    path: "user",
-    loadChildren: "./user/user.module#UserModule"
-
-  },
-  {
-    path: "commodity",
-    loadChildren: "./commodity/commodity.module#CommodityModule"
-
-  }
-];
+2、为了将项目部署在hello001目录下，应该如何打包呢？我们用下面的命令打包试试：
 
 ```
+ng build --base-href /hello001/
+```
+然后将dist下的文件全部拷贝到webapps/hello001目录下，浏览器输入：  http://localhost:8080/hello001/  。
 
-在app.module.ts下做相应的声明，注意跟路由的配置使用RouterModule.forRoot(appRoutes)，子路由的配置使用RouterModule.forChild(commodityRoutes)。
+居然能访问了，然后打开dist下的index.html，发现了
 
 ```
-import {RouterModule} from '@angular/router';
-import {appRoutes}    from "./app.routes";
-
-.....
-
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    RouterModule,
-    RouterModule.forRoot(appRoutes)
-  ],
+<base href="/hello001/">
 ```
 
-app.module.ts完整代码
+3、如果需要部署在  hello001目录下的test目录呢？那么就使用下面的打包命令吧：
 
 ```
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
-import {RouterModule} from '@angular/router';
-import {appRoutes}    from "./app.routes";
-
-import {AppComponent} from './app.component';
-import {HomeComponent} from './home/home.component';
-
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    RouterModule,
-    RouterModule.forRoot(appRoutes)
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule {
-}
-
+ng build --base-href /hello001/test/
 ```
 
-3、用户模块
-------------------------------
+二、打包发布后的404问题
+------- 
 
-3.1、user.routes.ts的模块配置如下：用户模块的访问路径是以app.routes为基准拼接的，如访问如下配置的路由，需要在前面加上user,比如：/user/container.
+项目中使用了路由，配置文件如下，然后我点击了 "进入help页面" 导航到 help组件页面，然后点击了浏览器 刷新 按钮，出现了下面的一幕：
+
+![image](https://github.com/jiekekeji/MAngular2Webpack/blob/master/demo011/preview/demo0111.gif)
+
+怎么刷新就变成404了呢？我们先看刷新时的地址：  http://localhost:8080/hello001/help  ，按照这个地址
+粗略的说就是要访问服务端上hello001目录下的help文件，这时候你看你服务器hello001目录下根本就没有help这个东西，
+当然就404了。
+
+如何解决这个问题呢？参考  https://github.com/jiekekeji/MVueWebpack/tree/master/demo015，
 
 
-```
-import {ContainerComponent} from './container/container.component';
-import {RegisterComponent} from './register/register.component';
-import {LoginComponent} from './login/login.component';
-export const userRoutes = [
-  {
-    path: "",
-    redirectTo: 'container/register',
-    pathMatch: 'full'
-  },
-  {
-    path: "container",
-    component: ContainerComponent,
-    children: [
-      {
-        path: "register",
-        component: RegisterComponent
-      },
-      {
-        path: "login",
-        component: LoginComponent
-      },
-    ]
-  },
-];
-
-```
-
-3.2、在user.module.ts下做相应声明,使用的是forChild：
-
-```
-import {RouterModule} from '@angular/router';
-import {userRoutes} from "./user.routes";
-....
-
-  imports: [
-    CommonModule,
-    RouterModule,
-    RouterModule.forChild(userRoutes)
-  ],
-```
-
-user.module.ts完整代码：
-
-```
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {LoginComponent} from './login/login.component';
-import {RouterModule} from '@angular/router';
-import {userRoutes} from "./user.routes";
-import { RegisterComponent } from './register/register.component';
-import { ContainerComponent } from './container/container.component'
-
-@NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    RouterModule.forChild(userRoutes)
-  ],
-  declarations: [LoginComponent, RegisterComponent, ContainerComponent]
-})
-export class UserModule {
-}
-
-```
-
-4、其他的组件和模块相类似。
-------------------------------
