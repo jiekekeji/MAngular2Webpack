@@ -1,7 +1,7 @@
 AngularJS2-基于angular-cli配置代理解决跨域请求问题
 ====
 
-1、angular-cli 生成的应用默认是部署在http://localhost:4200，如果接口应用部署在http://localhost:8080，接口应用不允许跨域访问。
+1、angular-cli 生成的应用默认是部署在  http://localhost:4200，  如果接口应用部署在http://localhost:8080，接口应用不允许跨域访问。
 那么通过如下访问方式访问：
 
 ```
